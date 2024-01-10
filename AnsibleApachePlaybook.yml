@@ -1,0 +1,17 @@
+#Apache2 install to a selected Ansible group. Group name can be passes an extravar
+- name: configuring web server on selected EC2s 
+  vars:
+    grouping: "NoGroup"    
+  hosts: "{{ grouping }}"
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted   

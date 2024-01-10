@@ -1,0 +1,24 @@
+ # Ansible playbook spin up ec2
+ #pass instance name (works as an Ansible group) and count as extravars
+ - name: Ansible to spin up EC2
+   vars:
+    grouping: "NoGroup"
+    count: 1
+   hosts: localhost   
+   tasks:
+   - name: launching an EC2 through Ansible
+     amazon.aws.ec2_instance:
+       name : "{{ grouping }}"
+       key_name: citkeypair
+       instance_type: t2.micro
+       image_id: ami-0caef02b518350c8b
+       region: eu-central-1
+       wait: yes
+       count: "{{ count }}"
+       vpc_subnet_id: subnet-028a383bdea8d7d28
+       aws_access_key: AKIAZIVOYXBZVOLC3L6Y
+       aws_secret_key: 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
+       network :
+         assign_public_ip: yes
+         security_group: default
+     register: result
