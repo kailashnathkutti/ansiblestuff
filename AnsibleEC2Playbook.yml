@@ -16,8 +16,8 @@
        wait: yes
        count: "{{ count }}"
        vpc_subnet_id: subnet-028a383bdea8d7d28
-       aws_access_key: AKIAZIVOYXBZVOLC3L6Y
-       aws_secret_key: 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
+       aws_access_key: 
+       aws_secret_key: 
        network :
          assign_public_ip: yes
          security_group: default
